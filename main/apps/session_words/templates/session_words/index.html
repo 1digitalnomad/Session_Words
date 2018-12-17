@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <style>
+        .container{
+            border: 2px solid black;
+            margin-top: 25px;
+            padding: 25px;
+        }
+        .form-container {
+            display: inline-block;
+        }
+
+        #border {
+            border-left: 6px solid black;
+            height: 300px;
+            display: inline-block;
+            margin: 25px 100px 0px 100px;
+        }
+        .rightcontainer {
+            display: inline-block;
+            margin-top: 25px;
+            vertical-align: top;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .blue{
+            color: blue;
+        }
+
+        .small{
+            font-size: 14px;
+        }
+        .big {
+            font-size: 25px;
+        }
+
+    </style>
+    <title>Add a Word</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form action="/add" method="POST">
+                {% csrf_token %}
+                <h1>Add a Word</h1>
+                <input type="text" name="word" id="">
+                <br>
+                <br>
+                <p>Choose color</p>
+                <input type="radio" name="color" value="red"> <label for="red">Red</label>
+                <br>
+                <input type="radio" name="color" value="green"><label for="green">Green</label>
+                <br>
+                <input type="radio" name="color" value="blue"><label for="blue">Blue</label>
+                <br>
+                <input type="checkbox" name="big_fonts" value="1"><label for="big_fonts">Show in BIG fonts!</label>
+                <br>
+                <input class="btn btn-primary" type="submit" value="Add to Session">
+
+            </form>
+        </div>
+
+    <div id="border"></div>
+    
+    <div class="rightcontainer">
+        <form action="/clear">
+            <input class="btn btn-danger" type="submit" value="Clear Session">
+        </form>
+        <div>
+            <ul>
+                {% for hey in request.session.it %}
+                
+                    <li class="{{ hey.color }} {{hey.size}}">{{ hey.word }}</li>
+                
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
